@@ -15,10 +15,17 @@ func _input(event :InputEvent):
 	#	$Ball.apply_central_impulse(event.global_position - $Ball.global_position)
 
 	if event.is_action_released("restart"):
-		get_tree().reload_current_scene()
+		restart()
 
+func restart():
+	get_tree().reload_current_scene()
 
 func _on_Ball_block_hit(block):
+	if !block.destructable: return
+	if block.type == block.Type.EXPLOSIVE:
+		$Ball.queue_free()
+		get_tree().create_timer(1).connect("timeout", self, "restart")
+
 	score += 1
 	print("Score: " + str(score))
 	block.queue_free()
