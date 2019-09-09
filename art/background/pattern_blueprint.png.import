@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/elementWood010.png-100113e55562686f25959b218ff9595a.stex"
+path="res://.import/pattern_blueprint.png-c9776b035e79da53570137c49eda7c49.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/blocks/elementWood010.png"
-dest_files=[ "res://.import/elementWood010.png-100113e55562686f25959b218ff9595a.stex" ]
+source_file="res://art/background/pattern_blueprint.png"
+dest_files=[ "res://.import/pattern_blueprint.png-c9776b035e79da53570137c49eda7c49.stex" ]
 
 [params]
 
