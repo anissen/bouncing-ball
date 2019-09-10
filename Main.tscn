@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://art/background/patternStripesShadow_large.png" type="Texture" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://art/blocks/wood/elementWood011.png" type="Texture" id=7]
 [ext_resource path="res://art/blocks/stone/elementStone011.png" type="Texture" id=8]
 [ext_resource path="res://art/blocks/explosive/elementExplosive011.png" type="Texture" id=9]
+[ext_resource path="res://audio/sounds/click2.ogg" type="AudioStream" id=10]
+[ext_resource path="res://audio/sounds/click4.ogg" type="AudioStream" id=11]
+[ext_resource path="res://audio/sounds/click3.ogg" type="AudioStream" id=12]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 0.8
@@ -80,7 +83,21 @@ shape = SubResource( 2 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
-[node name="Border" type="StaticBody2D" parent="."]
+[node name="hitBorderSound" type="AudioStreamPlayer2D" parent="Ball"]
+position = Vector2( -280, -340 )
+stream = ExtResource( 10 )
+
+[node name="hitBlockSound" type="AudioStreamPlayer2D" parent="Ball"]
+position = Vector2( -280, -340 )
+stream = ExtResource( 12 )
+
+[node name="hitStoneBlockSound" type="AudioStreamPlayer2D" parent="Ball"]
+position = Vector2( -280, -340 )
+stream = ExtResource( 11 )
+
+[node name="Border" type="StaticBody2D" parent="." groups=[
+"Border",
+]]
 visible = false
 
 [node name="Left" type="CollisionShape2D" parent="Border"]
