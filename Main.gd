@@ -6,7 +6,10 @@ extends Node2D
 
 var score := 0
 
+onready var explosion_scene = preload("res://Explosion.tscn")
+
 func _input(event :InputEvent):
+	if $Ball == null: return
 	if event is InputEventScreenDrag:
 		$Ball.apply_central_impulse(event.relative * 10)
 
@@ -29,3 +32,11 @@ func _on_Ball_block_hit(block):
 	score += 1
 	print("Score: " + str(score))
 	block.queue_free()
+
+	var explosion = explosion_scene.instance()
+	add_child(explosion)
+	explosion.position = block.position
+	explosion.rotate(rand_range(0, PI * 2))
+	explosion.play()
+	yield(explosion, "animation_finished")
+	explosion.queue_free()
