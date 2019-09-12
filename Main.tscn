@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://art/background/patternStripesShadow_large.png" type="Texture" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://audio/sounds/click2.ogg" type="AudioStream" id=10]
 [ext_resource path="res://audio/sounds/click4.ogg" type="AudioStream" id=11]
 [ext_resource path="res://audio/sounds/click3.ogg" type="AudioStream" id=12]
+[ext_resource path="res://fonts/FredokaOne-Regular.ttf" type="DynamicFontData" id=13]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 0.8
@@ -24,6 +25,13 @@ extents = Vector2( 90, 520 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 367.5, 80 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 35
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 13 )
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
@@ -115,5 +123,17 @@ shape = SubResource( 4 )
 [node name="Bottom" type="CollisionShape2D" parent="Border"]
 position = Vector2( 262.5, 1040 )
 shape = SubResource( 4 )
+
+[node name="ObjectiveLabel" type="RichTextLabel" parent="."]
+margin_top = 10.0
+margin_right = 540.0
+margin_bottom = 60.0
+custom_fonts/normal_font = SubResource( 6 )
+bbcode_enabled = true
+bbcode_text = "[center]Time: [color=blue]30[/color] / Swipes: [color=blue]5[/color][/center]"
+text = "Time: 30 / Swipes: 5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="block_hit" from="Ball" to="." method="_on_Ball_block_hit"]
 [connection signal="body_entered" from="Ball" to="Ball" method="_on_Ball_body_entered"]
