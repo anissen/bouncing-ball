@@ -26,7 +26,7 @@ extents = Vector2( 90, 520 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 367.5, 80 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=5]
 size = 35
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
@@ -128,12 +128,50 @@ shape = SubResource( 4 )
 margin_top = 10.0
 margin_right = 540.0
 margin_bottom = 60.0
-custom_fonts/normal_font = SubResource( 6 )
+custom_fonts/normal_font = SubResource( 5 )
 bbcode_enabled = true
 bbcode_text = "[center]Time: [color=blue]30[/color] / Swipes: [color=blue]5[/color][/center]"
 text = "Time: 30 / Swipes: 5"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="LevelWonMessage" type="RichTextLabel" parent="."]
+visible = false
+margin_top = 420.0
+margin_right = 540.0
+margin_bottom = 470.0
+custom_fonts/normal_font = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[center]Level [rainbow freq=0.2][wave amp=50 freq=5]won![/wave][/rainbow][/center]
+
+"
+text = "Level [rainbow freq=0.2][wave amp=50 freq=5]won![ave amp=50 freq=5]won![ve amp=50 freq=5]won![e amp=50 freq=5]won![ amp=50 freq=5]won![amp=50 freq=5]won![mp=50 freq=5]won![p=50 freq=5]won![=50 freq=5]won![50 freq=5]won![0 freq=5]won![ freq=5]won![freq=5]won![req=5]won![eq=5]won![q=5]won![=5]won![5]won![]won![won![on![n![![[/wave][wave][ave][ve][e][][[/rainbow]
+
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelLostMessage" type="RichTextLabel" parent="."]
+visible = false
+margin_top = 420.0
+margin_right = 540.0
+margin_bottom = 470.0
+custom_fonts/normal_font = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "[center]Level [color=red][shake rate=15 level=10]lost![/shake][/color][/center]
+
+"
+text = "Level [shake rate=15 level=10]lost![hake rate=15 level=10]lost![ake rate=15 level=10]lost![ke rate=15 level=10]lost![e rate=15 level=10]lost![ rate=15 level=10]lost![rate=15 level=10]lost![ate=15 level=10]lost![te=15 level=10]lost![e=15 level=10]lost![=15 level=10]lost![15 level=10]lost![5 level=10]lost![ level=10]lost![level=10]lost![evel=10]lost![vel=10]lost![el=10]lost![l=10]lost![=10]lost![10]lost![0]lost![]lost![lost![ost![st![t![![[/shake]
+
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameTimer" type="Timer" parent="."]
+autostart = true
 [connection signal="block_hit" from="Ball" to="." method="_on_Ball_block_hit"]
 [connection signal="body_entered" from="Ball" to="Ball" method="_on_Ball_body_entered"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]

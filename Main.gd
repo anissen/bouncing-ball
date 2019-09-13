@@ -32,11 +32,16 @@ func update_label():
 	var swipes_color = "blue" if swipes_left > 0 else "red"
 	$ObjectiveLabel.bbcode_text = "[center]Time: [color=" + time_color + "]" + str(time_left) + "[/color] / Swipes: [color=" + swipes_color + "]" + str(swipes_left) + "[/color][/center]"
 
+	if time_left == 0 and swipes_left == 0:
+		$LevelLostMessage.show()
+		get_tree().create_timer(1).connect("timeout", self, "restart")
+
 func _on_Ball_block_hit(block):
 	if !$Ball: return
 	if !block.destructable: return
 	if block.type == block.Type.EXPLOSIVE:
 		$Ball.queue_free()
+		$LevelLostMessage.show()
 		get_tree().create_timer(1).connect("timeout", self, "restart")
 
 	score += 1
@@ -50,3 +55,15 @@ func _on_Ball_block_hit(block):
 	explosion.play()
 	yield(explosion, "animation_finished")
 	explosion.queue_free()
+
+	var has_won = true
+	for b in get_tree().get_nodes_in_group("Blocks"):
+		if b.destructable and b.type == b.Type.NORMAL:
+			has_won = false
+			break
+
+	if has_won: $LevelWonMessage.show()
+
+func _on_GameTimer_timeout():
+	elapsed_seconds += 1
+	update_label()
