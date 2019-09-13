@@ -47,7 +47,15 @@ __meta__ = {
 }
 
 [node name="Block" parent="." instance=ExtResource( 6 )]
-position = Vector2( 148.383, 168.682 )
+position = Vector2( 130, 220 )
+texture = ExtResource( 5 )
+
+[node name="Block8" parent="." instance=ExtResource( 6 )]
+position = Vector2( 230, 110 )
+texture = ExtResource( 5 )
+
+[node name="Block9" parent="." instance=ExtResource( 6 )]
+position = Vector2( 190, 610 )
 texture = ExtResource( 5 )
 
 [node name="Block2" parent="." instance=ExtResource( 6 )]
@@ -55,7 +63,11 @@ position = Vector2( 410, 168.682 )
 texture = ExtResource( 7 )
 
 [node name="Block3" parent="." instance=ExtResource( 6 )]
-position = Vector2( 400, 760 )
+position = Vector2( 370, 850 )
+texture = ExtResource( 5 )
+
+[node name="Block7" parent="." instance=ExtResource( 6 )]
+position = Vector2( 400, 660 )
 texture = ExtResource( 5 )
 
 [node name="Block4" parent="." instance=ExtResource( 6 )]
@@ -71,8 +83,13 @@ position = Vector2( 280, 470 )
 texture = ExtResource( 8 )
 destructable = false
 
-[node name="Block7" parent="." instance=ExtResource( 6 )]
-position = Vector2( 470, 470 )
+[node name="ExplosiveBlock" parent="." instance=ExtResource( 6 )]
+position = Vector2( 430, 470 )
+texture = ExtResource( 9 )
+type = 1
+
+[node name="ExplosiveBlock2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 130, 470 )
 texture = ExtResource( 9 )
 type = 1
 
@@ -149,6 +166,7 @@ bbcode_text = "[center]Level [rainbow freq=0.2][wave amp=50 freq=5]won![/wave][/
 text = "Level [rainbow freq=0.2][wave amp=50 freq=5]won![ave amp=50 freq=5]won![ve amp=50 freq=5]won![e amp=50 freq=5]won![ amp=50 freq=5]won![amp=50 freq=5]won![mp=50 freq=5]won![p=50 freq=5]won![=50 freq=5]won![50 freq=5]won![0 freq=5]won![ freq=5]won![freq=5]won![req=5]won![eq=5]won![q=5]won![=5]won![5]won![]won![won![on![n![![[/wave][wave][ave][ve][e][][[/rainbow]
 
 "
+scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -166,6 +184,7 @@ bbcode_text = "[center]Level [color=red][shake rate=15 level=10]lost![/shake][/c
 text = "Level [shake rate=15 level=10]lost![hake rate=15 level=10]lost![ake rate=15 level=10]lost![ke rate=15 level=10]lost![e rate=15 level=10]lost![ rate=15 level=10]lost![rate=15 level=10]lost![ate=15 level=10]lost![te=15 level=10]lost![e=15 level=10]lost![=15 level=10]lost![15 level=10]lost![5 level=10]lost![ level=10]lost![level=10]lost![evel=10]lost![vel=10]lost![el=10]lost![l=10]lost![=10]lost![10]lost![0]lost![]lost![lost![ost![st![t![![[/shake]
 
 "
+scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
