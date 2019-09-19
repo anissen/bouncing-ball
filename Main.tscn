@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://art/background/patternStripesShadow_large.png" type="Texture" id=1]
 [ext_resource path="res://Main.gd" type="Script" id=2]
@@ -13,21 +13,39 @@
 [ext_resource path="res://audio/sounds/click4.ogg" type="AudioStream" id=11]
 [ext_resource path="res://audio/sounds/click3.ogg" type="AudioStream" id=12]
 [ext_resource path="res://fonts/FredokaOne-Regular.ttf" type="DynamicFontData" id=13]
+[ext_resource path="res://art/particles/grey_arrowDownWhite.png" type="Texture" id=14]
+[ext_resource path="res://art/grey_circle.png" type="Texture" id=15]
 
-[sub_resource type="PhysicsMaterial" id=1]
+[sub_resource type="CircleShape2D" id=8]
+radius = 100.0
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec2 pos : hint_vec2;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/pos = Vector2( 100, 100 )
+
+[sub_resource type="PhysicsMaterial" id=3]
 bounce = 0.8
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=4]
 radius = 20.0
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 90, 520 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 367.5, 80 )
 
-[sub_resource type="DynamicFont" id=5]
-size = 35
+[sub_resource type="DynamicFont" id=7]
+size = 40
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
@@ -36,7 +54,33 @@ font_data = ExtResource( 13 )
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
 
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 265, 170 )
+space_override = 1
+gravity = 1000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 8 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Area2D"]
+amount = 4
+lifetime = 0.2
+texture = ExtResource( 14 )
+emission_shape = 1
+emission_sphere_radius = 75.0
+direction = Vector2( 0, 1 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 100.0
+color = Color( 1, 1, 1, 0.196078 )
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+modulate = Color( 1, 1, 1, 0.196078 )
+scale = Vector2( 5.6, 5.6 )
+texture = ExtResource( 15 )
+
 [node name="Background" type="TextureRect" parent="."]
+material = SubResource( 2 )
 margin_right = 540.0
 margin_bottom = 960.0
 texture = ExtResource( 1 )
@@ -79,30 +123,30 @@ position = Vector2( 150, 830 )
 texture = ExtResource( 5 )
 
 [node name="Block6" parent="." instance=ExtResource( 6 )]
-position = Vector2( 280, 470 )
+position = Vector2( 270, 470 )
 texture = ExtResource( 8 )
 destructable = false
 
 [node name="ExplosiveBlock" parent="." instance=ExtResource( 6 )]
-position = Vector2( 430, 470 )
+position = Vector2( 470, 470 )
 texture = ExtResource( 9 )
 type = 1
 
 [node name="ExplosiveBlock2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 130, 470 )
+position = Vector2( 70, 470 )
 texture = ExtResource( 9 )
 type = 1
 
 [node name="Ball" type="RigidBody2D" parent="."]
 position = Vector2( 280, 340 )
-physics_material_override = SubResource( 1 )
+physics_material_override = SubResource( 3 )
 contacts_reported = 1
 contact_monitor = true
 linear_damp = 0.5
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="elementMetal001" type="Sprite" parent="Ball"]
 scale = Vector2( 0.5, 0.5 )
@@ -127,27 +171,27 @@ visible = false
 
 [node name="Left" type="CollisionShape2D" parent="Border"]
 position = Vector2( -90, 480 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Right" type="CollisionShape2D" parent="Border"]
 position = Vector2( 630, 480 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Top" type="CollisionShape2D" parent="Border"]
 position = Vector2( 262.5, -80 )
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 
 [node name="Bottom" type="CollisionShape2D" parent="Border"]
 position = Vector2( 262.5, 1040 )
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 
 [node name="ObjectiveLabel" type="RichTextLabel" parent="."]
 margin_top = 10.0
 margin_right = 540.0
 margin_bottom = 60.0
-custom_fonts/normal_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 7 )
 bbcode_enabled = true
-bbcode_text = "[center]Time: [color=blue]30[/color] / Swipes: [color=blue]5[/color][/center]"
+bbcode_text = "[center]Time: [color=#0074D9]30[/color] / Swipes: [color=#0074D9]5[/color][/center]"
 text = "Time: 30 / Swipes: 5"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -158,12 +202,12 @@ visible = false
 margin_top = 420.0
 margin_right = 540.0
 margin_bottom = 470.0
-custom_fonts/normal_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 7 )
 bbcode_enabled = true
-bbcode_text = "[center]Level [rainbow freq=0.2][wave amp=50 freq=5]won![/wave][/rainbow][/center]
+bbcode_text = "[center][rainbow freq=0.2][wave amp=50 freq=5]Level won![/wave][/rainbow][/center]
 
 "
-text = "Level [rainbow freq=0.2][wave amp=50 freq=5]won![ave amp=50 freq=5]won![ve amp=50 freq=5]won![e amp=50 freq=5]won![ amp=50 freq=5]won![amp=50 freq=5]won![mp=50 freq=5]won![p=50 freq=5]won![=50 freq=5]won![50 freq=5]won![0 freq=5]won![ freq=5]won![freq=5]won![req=5]won![eq=5]won![q=5]won![=5]won![5]won![]won![won![on![n![![[/wave][wave][ave][ve][e][][[/rainbow]
+text = "Level won!
 
 "
 scroll_active = false
@@ -176,12 +220,12 @@ visible = false
 margin_top = 420.0
 margin_right = 540.0
 margin_bottom = 470.0
-custom_fonts/normal_font = SubResource( 5 )
+custom_fonts/normal_font = SubResource( 7 )
 bbcode_enabled = true
-bbcode_text = "[center]Level [color=red][shake rate=15 level=10]lost![/shake][/color][/center]
+bbcode_text = "[center][color=#FF4136][shake rate=15 level=10]Level lost![/shake][/color][/center]
 
 "
-text = "Level [shake rate=15 level=10]lost![hake rate=15 level=10]lost![ake rate=15 level=10]lost![ke rate=15 level=10]lost![e rate=15 level=10]lost![ rate=15 level=10]lost![rate=15 level=10]lost![ate=15 level=10]lost![te=15 level=10]lost![e=15 level=10]lost![=15 level=10]lost![15 level=10]lost![5 level=10]lost![ level=10]lost![level=10]lost![evel=10]lost![vel=10]lost![el=10]lost![l=10]lost![=10]lost![10]lost![0]lost![]lost![lost![ost![st![t![![[/shake]
+text = "Level lost!
 
 "
 scroll_active = false
