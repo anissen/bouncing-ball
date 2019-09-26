@@ -11,22 +11,28 @@ func _input(event :InputEvent):
 	if !get_node_or_null("Ball"): return
 
 	if event.is_action_pressed("ui_touch"):
-#		is_swiping = true
-#		var tween = Tween.new()
-#		tween.interpolate_property(Engine, "time_scale", Engine.time_scale, 0.1, 0.3, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-#		add_child(tween)
-#		tween.start()
-#		#yield(tween, "tween_completed")
+		is_swiping = true
+		$Line2D.visible = true
 		Engine.time_scale = 0.2
 	elif event.is_action_released("ui_touch"):
 		is_swiping = false
 		swipes += 1
 		Engine.time_scale = 1
+		$Line2D.visible = false
 		var diff = event.position - $Ball.position
 		$Ball.apply_central_impulse(diff * 5)
 
 	if event.is_action_released("restart"):
 		restart()
+
+func _process(delta):
+	if !get_node_or_null("Ball"):
+		$Line2D.visible = false
+		return
+
+	if is_swiping:
+		$Line2D.set_point_position(0, get_global_mouse_position())
+		$Line2D.set_point_position(1, $Ball.position)
 
 func restart():
 	get_tree().reload_current_scene()
@@ -72,6 +78,7 @@ func _on_Ball_block_hit(block):
 			break
 
 	if has_won:
+		Engine.time_scale = 1
 		$Ball.queue_free()
 		$LevelWonMessage.show()
 

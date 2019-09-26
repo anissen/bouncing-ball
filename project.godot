@@ -19,6 +19,11 @@ config/name="Bouncing Ball"
 run/main_scene="res://Main.tscn"
 config/icon="res://art/ball/elementMetal001.png"
 
+[debug]
+
+gdscript/warnings/unused_argument=false
+gdscript/warnings/return_value_discarded=false
+
 [display]
 
 window/size/width=540
