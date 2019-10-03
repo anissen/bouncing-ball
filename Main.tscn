@@ -11,7 +11,7 @@
 [ext_resource path="res://audio/sounds/click3.ogg" type="AudioStream" id=12]
 [ext_resource path="res://fonts/FredokaOne-Regular.ttf" type="DynamicFontData" id=13]
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform vec2 pos : hint_vec2;
@@ -20,21 +20,21 @@ void fragment() {
 	COLOR = texture(TEXTURE, UV);
 }"
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/pos = Vector2( 100, 100 )
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=3]
 max_value = 2.0
 _data = [ Vector2( 0.0158887, 0.7536 ), 0.0, 0.0, 0, 0, Vector2( 1, 1.528 ), 0.376227, 0.0, 0, 0 ]
 
-[sub_resource type="PhysicsMaterial" id=5]
+[sub_resource type="PhysicsMaterial" id=4]
 bounce = 0.8
 
-[sub_resource type="CircleShape2D" id=6]
+[sub_resource type="CircleShape2D" id=5]
 radius = 20.0
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=6]
 size = 40
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
@@ -52,7 +52,7 @@ script = ExtResource( 2 )
 level_scenes = [ ExtResource( 5 ), ExtResource( 6 ) ]
 
 [node name="Background" type="TextureRect" parent="."]
-material = SubResource( 3 )
+material = SubResource( 2 )
 margin_right = 540.0
 margin_bottom = 960.0
 texture = ExtResource( 1 )
@@ -69,7 +69,7 @@ __meta__ = {
 [node name="Line2D" type="Line2D" parent="GameStuff"]
 points = PoolVector2Array( 350, 310, 340, 520 )
 width = 20.0
-width_curve = SubResource( 4 )
+width_curve = SubResource( 3 )
 default_color = Color( 0.129412, 0.411765, 0.776471, 0.784314 )
 joint_mode = 2
 begin_cap_mode = 2
@@ -77,14 +77,14 @@ end_cap_mode = 2
 
 [node name="Ball" type="RigidBody2D" parent="GameStuff"]
 position = Vector2( 280, 340 )
-physics_material_override = SubResource( 5 )
+physics_material_override = SubResource( 4 )
 contacts_reported = 1
 contact_monitor = true
 linear_damp = 0.5
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameStuff/Ball"]
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="elementMetal001" type="Sprite" parent="GameStuff/Ball"]
 scale = Vector2( 0.5, 0.5 )
@@ -106,7 +106,7 @@ stream = ExtResource( 11 )
 margin_top = 10.0
 margin_right = 540.0
 margin_bottom = 60.0
-custom_fonts/normal_font = SubResource( 9 )
+custom_fonts/normal_font = SubResource( 6 )
 bbcode_enabled = true
 bbcode_text = "[center]Time: [color=#0074D9]30[/color] / Swipes: [color=#0074D9]5[/color][/center]"
 text = "Time: 30 / Swipes: 5"
@@ -119,7 +119,7 @@ visible = false
 margin_top = 420.0
 margin_right = 540.0
 margin_bottom = 470.0
-custom_fonts/normal_font = SubResource( 9 )
+custom_fonts/normal_font = SubResource( 6 )
 bbcode_enabled = true
 bbcode_text = "[center][rainbow freq=0.2][wave amp=50 freq=5]Level won![/wave][/rainbow][/center]
 
@@ -137,7 +137,7 @@ visible = false
 margin_top = 420.0
 margin_right = 540.0
 margin_bottom = 470.0
-custom_fonts/normal_font = SubResource( 9 )
+custom_fonts/normal_font = SubResource( 6 )
 bbcode_enabled = true
 bbcode_text = "[center][color=#FF4136][shake rate=15 level=10]Level lost![/shake][/color][/center]
 

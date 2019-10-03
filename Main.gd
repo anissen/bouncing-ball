@@ -8,6 +8,7 @@ const TIME_BEFORE_RESTART = 1
 
 onready var explosion_scene := preload("res://Explosion.tscn")
 export (Array, PackedScene) var level_scenes
+var game_over := false
 
 func _ready() -> void:
 	load_level()
@@ -26,7 +27,7 @@ func load_level():
 func _input(event :InputEvent):
 	if !get_node_or_null("GameStuff/Ball"): return
 
-	if event.is_action_pressed("ui_touch") and swipes < 6:
+	if event.is_action_pressed("ui_touch") and swipes < 5:
 		is_swiping = true
 		$GameStuff/Line2D.visible = true
 		Engine.time_scale = 0.2
@@ -36,7 +37,7 @@ func _input(event :InputEvent):
 		Engine.time_scale = 1
 		$GameStuff/Line2D.visible = false
 		var diff = event.position - $GameStuff/Ball.position
-		$GameStuff/Ball.apply_central_impulse(diff * 5)
+		$GameStuff/Ball.apply_central_impulse(diff * 3)
 		update_label()
 
 	if event.is_action_released("restart"):
@@ -52,7 +53,7 @@ func _process(delta):
 		$GameStuff/Line2D.set_point_position(1, $GameStuff/Ball.position)
 
 func update_label():
-	var time_left = 10 - elapsed_seconds;
+	var time_left = 15 - elapsed_seconds
 	if time_left < 0: time_left = 0
 	var time_color = "#0074D9" if time_left > 0 else "#FF4136"
 	var swipes_left = 5 - swipes
@@ -91,8 +92,10 @@ func _on_GameTimer_timeout():
 	update_label()
 
 func game_over(won):
+	if game_over: return
+	game_over = true
 	Engine.time_scale = 1
-	$GameStuff/Ball.queue_free()
+	if get_node_or_null("GameStuff/Ball"): $GameStuff/Ball.queue_free()
 	if won: $GameStuff/LevelWonMessage.show()
 	else: $GameStuff/LevelLostMessage.show()
 

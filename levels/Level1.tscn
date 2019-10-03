@@ -1,6 +1,5 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Block.gd" type="Script" id=1]
 [ext_resource path="res://art/blocks/wood/elementWood011.png" type="Texture" id=2]
 [ext_resource path="res://art/grey_circle.png" type="Texture" id=3]
 [ext_resource path="res://art/blocks/stone/elementStone011.png" type="Texture" id=4]
@@ -39,82 +38,49 @@ modulate = Color( 1, 1, 1, 0.196078 )
 scale = Vector2( 5.6, 5.6 )
 texture = ExtResource( 3 )
 
-[node name="Block" type="StaticBody2D" parent="." groups=[
-"Blocks",
-] instance=ExtResource( 8 )]
+[node name="Block" parent="." instance=ExtResource( 8 )]
 position = Vector2( 130, 220 )
-script = ExtResource( 1 )
 texture = ExtResource( 6 )
 
-[node name="Block8" type="StaticBody2D" parent="." groups=[
-"Blocks",
-] instance=ExtResource( 8 )]
+[node name="Block8" parent="." instance=ExtResource( 8 )]
 position = Vector2( 230, 110 )
-script = ExtResource( 1 )
 texture = ExtResource( 6 )
 
-[node name="Block9" type="StaticBody2D" parent="." groups=[
-"Blocks",
-] instance=ExtResource( 8 )]
+[node name="Block9" parent="." instance=ExtResource( 8 )]
 position = Vector2( 190, 610 )
-script = ExtResource( 1 )
 texture = ExtResource( 6 )
 
-[node name="Block2" type="StaticBody2D" parent="." groups=[
-"Blocks",
-] instance=ExtResource( 8 )]
+[node name="Block2" parent="." instance=ExtResource( 8 )]
 position = Vector2( 410, 168.682 )
-script = ExtResource( 1 )
 texture = ExtResource( 2 )
 
-[node name="Block3" type="StaticBody2D" parent="." groups=[
-"Blocks",
-] instance=ExtResource( 8 )]
+[node name="Block3" parent="." instance=ExtResource( 8 )]
 position = Vector2( 370, 850 )
-script = ExtResource( 1 )
 texture = ExtResource( 6 )
 
-[node name="Block7" type="StaticBody2D" parent="." groups=[
-"Blocks",
-] instance=ExtResource( 8 )]
+[node name="Block7" parent="." instance=ExtResource( 8 )]
 position = Vector2( 400, 660 )
-script = ExtResource( 1 )
 texture = ExtResource( 6 )
 
-[node name="Block4" type="StaticBody2D" parent="." groups=[
-"Blocks",
-] instance=ExtResource( 8 )]
+[node name="Block4" parent="." instance=ExtResource( 8 )]
 position = Vector2( 150, 760 )
-script = ExtResource( 1 )
 texture = ExtResource( 2 )
 
-[node name="Block5" type="StaticBody2D" parent="." groups=[
-"Blocks",
-] instance=ExtResource( 8 )]
+[node name="Block5" parent="." instance=ExtResource( 8 )]
 position = Vector2( 150, 830 )
-script = ExtResource( 1 )
 texture = ExtResource( 6 )
 
-[node name="Block6" type="StaticBody2D" parent="." groups=[
-"Blocks",
-] instance=ExtResource( 8 )]
+[node name="Block6" parent="." instance=ExtResource( 8 )]
 position = Vector2( 270, 470 )
-script = ExtResource( 1 )
 texture = ExtResource( 4 )
 destructable = false
 
-[node name="ExplosiveBlock" type="StaticBody2D" parent="." groups=[
-"Blocks",
-] instance=ExtResource( 8 )]
+[node name="ExplosiveBlock" parent="." instance=ExtResource( 8 )]
 position = Vector2( 470, 470 )
-script = ExtResource( 1 )
 texture = ExtResource( 5 )
 type = 1
 
-[node name="ExplosiveBlock2" type="StaticBody2D" parent="." groups=[
-"Blocks",
-] instance=ExtResource( 8 )]
+[node name="ExplosiveBlock2" parent="." instance=ExtResource( 8 )]
 position = Vector2( 70, 470 )
-script = ExtResource( 1 )
 texture = ExtResource( 5 )
 type = 1
